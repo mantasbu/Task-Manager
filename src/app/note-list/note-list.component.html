@@ -1,0 +1,46 @@
+<p class="lead">Currently you have: {{ notes.length }} tasks to do</p>         
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Body</th>
+			<th>Media</th>
+			<th>Status</th>
+			<th>Created</th>
+			<th>Edited</th>
+			<th>Deleted</th>
+			<th>Owner</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let note of notes">
+			<td>{{ note.title }}</td>
+			<td>{{ note.body }}</td>
+			<td><img *ngIf="note.media" [src]="note.media" height="100px" width="100px"></td>
+			<td>{{ note.status }}</td>
+			<td>{{ getFormattedDate(note.created) }}</td>
+			<td>{{ getFormattedDate(note.edited) }}</td>
+			<td>{{ getFormattedDate(note.deleted) }}</td>
+			<td>{{ note.owner }}</td>
+			<td>
+				<i id="delete" class="material-icons" (click)="onDelete()" data-toggle="modal" data-target="#alertModal">
+					delete
+				</i>
+			</td>
+			<td>
+				<i id="edit" class="material-icons">
+					edit
+				</i>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- Modal -->
+<app-modal
+	[title]="'Delete Selected Task'"
+	[body]="'Are you sure you want to delete selected task?'"
+	(confirm)="onDelete($event)">
+</app-modal>

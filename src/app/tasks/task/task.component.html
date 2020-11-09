@@ -1,0 +1,24 @@
+<div class="row main-container">
+  <div class="col-xs-12 col-md-8 col-md-offset-2">
+    <div class="row">
+      <h5>{{ task.title }}</h5>
+    </div>
+    <div class="row">
+      <p>{{ task.body }}</p>
+    </div>
+    <div class="row">
+      <button class="btn btn-primary" [ngClass]="{'btn-success': task.status === toDo}" (click)="onSetStatusTo(toDo)">To do</button>
+      <button class="btn btn-primary" [ngClass]="{'btn-success': task.status === inProgress}" (click)="onSetStatusTo(inProgress)">In progress</button>
+      <button class="btn btn-primary" [ngClass]="{'btn-success': task.status === done}" (click)="onSetStatusTo(done)">Done</button>
+    </div>
+  </div>
+  <div class="row">
+    <p>Created: {{ getFormattedDate(task.created) }}</p>
+  </div>
+  <div class="row" *ngIf="task.edited">
+    <p>Edited: {{ getFormattedDate(task.edited) }}</p>
+  </div>
+  <div class="row" *ngIf="task.media">
+    <img [src]="task.media" height="100px" width="100px">
+  </div>
+</div>
